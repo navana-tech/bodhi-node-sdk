@@ -8,7 +8,7 @@ export default defineConfig({
   format: ['esm'],
   dts: true,
   clean: true,
-  sourcemap: true,
+  sourcemap: false,
   target: 'es2022',
   define: {
     __PACKAGE_VERSION__: JSON.stringify(pkg.version),

@@ -1,6 +1,6 @@
 {
   "name": "livekit-agents-plugin-bodhi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bodhi (Navana Tech) STT and TTS plugin for LiveKit Node Agents",
   "type": "module",
   "main": "dist/index.js",
@@ -13,7 +13,6 @@
   },
   "files": [
     "dist",
-    "src",
     "README.md"
   ],
   "keywords": [
