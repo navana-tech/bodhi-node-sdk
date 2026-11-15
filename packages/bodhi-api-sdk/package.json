@@ -30,6 +30,7 @@
   "homepage": "https://www.navanatech.in/",
   "scripts": {
     "build": "tsup",
+    "test": "npm run build && node --test",
     "clean": "rm -rf dist"
   },
   "dependencies": {
