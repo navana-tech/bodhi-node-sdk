@@ -230,6 +230,7 @@ export class BodhiSTTSession extends EventEmitter {
   #ws: WebSocket;
   #ready = false;
   #pending: Buffer[] = [];
+  #pendingEnd = false;
 
   constructor(ws: WebSocket, config: Record<string, unknown>) {
     super();
@@ -239,6 +240,7 @@ export class BodhiSTTSession extends EventEmitter {
       this.#ready = true;
       for (const b of this.#pending) ws.send(b);
       this.#pending = [];
+      if (this.#pendingEnd) ws.send(JSON.stringify({ eof: 1 }));
       this.emit('open');
     });
     ws.on('message', (data: RawData) => {
@@ -273,6 +275,7 @@ export class BodhiSTTSession extends EventEmitter {
   /** Tell the server no more audio is coming, so it flushes a final transcript. */
   end(): void {
     if (this.#ws.readyState === WebSocket.OPEN) this.#ws.send(JSON.stringify({ eof: 1 }));
+    else if (this.#ws.readyState === WebSocket.CONNECTING) this.#pendingEnd = true;
   }
 
   close(): void {
